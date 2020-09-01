@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}     
+<h1><img src="{{ auction.img.url }}" width="200">{{auction.name}}</h1>    
+
+    <h1>Place your comment:</h1>
+  
+    <form method="POST" enctype="multipart/form-data"> 
+        {% csrf_token %}
+        {{ form.as_p }}
+       <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+
+{% endblock %}

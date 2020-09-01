@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %} 
+<div class="category-background">
+    <h1 style="text-align: center;">{{ category.category_list }}</h1>
+    {% for auction in auctions %}        
+    <div class="item">
+        <div class="item-img">
+        <a href="{% url 'auction' auction.id %}"><img src="{{ auction.img.url }}" class="center"></a>
+        </div>
+        <div class="item-info">
+            <a href="{% url 'auction' auction.id %}"><h4>{{ auction.name }}</h4></a>
+            {%for bid in bids%}
+                <h3>Actual bid ${{bid.new_bid}}</h3>
+            {%empty%}
+                <h5>Starting price: ${{ auction.starting_bid }}</h5>
+                No offers yet.
+            {%endfor%}
+            <span class="text">{{auction.description}}</span> 
+            <p><a href="{% url 'auction' auction.id %}">View details</a></p>
+        </div>
+    </div>
+{% empty %}
+    No listings yet.
+{% endfor %}
+</div>
+    {% endblock %}
+
+    

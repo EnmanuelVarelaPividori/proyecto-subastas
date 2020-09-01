@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 style="padding-left: 10px;">Categories</h2>
+        {% for category in categories %}
+        <div class="d-inline-flex p-2">
+            <div class="categories">
+                <a href="{% url 'category' category.id %}" style="color:inherit;text-decoration: none;">
+                <div class="category-img">
+                    <img src="{{ category.img.url }}"width="350" height="225" > 
+                    <div class="centered"><h1>{{category.category_list}}</h1></div>
+                </div>   
+                </a>
+            </div>       
+        </div>
+                {% empty %}
+                    No Categories.
+                {% endfor %}  
+            
+{% endblock %}

@@ -1,0 +1,32 @@
+.category-img {
+    margin: 10px;
+}
+.category-background {
+    z-index: 99;
+	position: fixed;
+	bottom: 0%;
+    background: url("{{ category.img.url }}");
+    position: relative;
+    background-color: #f7f7f7;
+    min-height: 673px;
+}
+.categories {
+    display: flex; 
+    flex-direction: column;
+    border-radius: 5px;  
+    text-align: center;
+    background-color: #f7f7f7;
+    margin-left: 50px;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.18);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.18);
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.18);
+    position: relative;
+}
+.centered {
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    -webkit-text-stroke: 1px #383838;
+}

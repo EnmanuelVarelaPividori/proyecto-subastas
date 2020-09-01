@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}     
+    <h1>{{ auction.name }}</h1>
+
+            <img src="{{ auction.img.url }}" width="100"/>
+    <form action="." method="POST">{% csrf_token %}
+        <h3>Are you sure you want to delete "{{ auction.name }}" from your listings?</h3>
+        <p><input type='submit' value='Yes' class='btn btn-primary'>
+        <a href='{% url "index" %}' class="btn btn-secondary">No</a></p>
+    </form>   
+  
+{% endblock %}

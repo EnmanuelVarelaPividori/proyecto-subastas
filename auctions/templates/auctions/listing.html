@@ -1,0 +1,75 @@
+{% extends "auctions/layout.html" %}
+{% block body %} 
+<div class="background">
+    <div class="flex-container" style="padding-top: 20px;">
+        <div class="listing-img">
+            <img src="{{ auction.img.url }}"  width="100%">
+        </div>
+            <div class="listing-info">
+                <div class="small-font">
+                    Posted by {{auction.user}} - Created {{auction.created_on}}
+                </div>
+                <h3>{{ auction.name }}</h3>
+                {{auction.category}}
+                {%for bid in bids%}
+                <h3>Actual bid ${{latest_bid.new_bid}}</h3>
+                {%empty%}
+                <h5>Starting price: ${{ auction.starting_bid }}</h5>
+                No offers yet.
+                {%endfor%}
+                <form method="POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <div class="form-group">
+                        <input autofocus class="form-control" type="number" name="new_bid" placeholder="New Bid">
+                    </div>
+                    <button type="submit" class="btn btn-success">Place a New Bid</button>    
+                </form>
+                <div class="bottom">
+                        <button class="btn btn-secondary"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" name="form2">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                        </svg>  Add to Watchlist</button>
+                </div>
+                <div class="bottom">
+                    {% if user == auction.user %}
+                    <p><a href="{% url 'edit' auction.id %}" class="btn btn-info">Edit</a>
+                    <a href="{% url 'delete' auction.id %}" class="btn btn-danger">Delete</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        
+    </div>
+    {% if is_favourite %}Yay, you like it!{% endif %}
+    <div class="description-comments">   
+        <h4>Description</h4>
+                {{auction.description}}
+        <hr>
+    </div>
+    <div class="comments-box">
+        <div class="comments-form">
+            <h4>Comments</h4>
+            <form method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="comment-align">
+                    <div class="form-group">
+                        <textarea class="form-control" id="body" rows="4" name="body"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comment</button>    
+                </div>
+            </form>
+        </div>
+        
+            <ul style="list-style-type: none; margin: 0; padding: 0;">             
+                {%for comment in comments%}
+                <li>
+                <div class="comments">
+                <p>{{comment.user}} - {{comment.created_on}}</p>
+                   <h4>{{comment.body}}</h4>              
+                </div>
+                </li>
+                {%empty%}
+                {%endfor%}
+            </ul>       
+    </div>  
+</div> 
+    {% endblock %}
